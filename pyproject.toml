@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "jetstream"
+version = "0.1.0"
+description = "Roblox utility tool for converting videos/gifs into frames for importing into Roblox"
+authors = ["Sam Perillo <sam@perillo.dev>"]
+license = "LICENSE.md"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.13"
+click = "^8.1.8"
+rblx-open-cloud = "^2.1.4"
+colorama = "^0.4.6"
+termcolor = "^2.5.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+jetstream = "jetstream:cli"
