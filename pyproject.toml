@@ -12,6 +12,8 @@ click = "^8.1.8"
 rblx-open-cloud = "^2.1.4"
 colorama = "^0.4.6"
 termcolor = "^2.5.0"
+replicate = "^1.0.4"
+ffmpeg-python = "^0.2.0"
 
 [build-system]
 requires = ["poetry-core"]

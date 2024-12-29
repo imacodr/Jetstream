@@ -10,15 +10,17 @@ def get_key():
     if config["robloxKey"] == None:
             return {"ok": False, "msg": Fore.YELLOW + "⚠️ You don't have a key! Add a key using " + colored("jetstream roblox set", "black", "on_yellow")}
     
-    return config["robloxKey"]
+    return {"ok": True, "key": config["robloxKey"]}
 
 
 def keyTest():
     try:
-        key = get_key()
-        if not key["ok"]:
-             return key
-        user = User(501780776, key)
+        keyc = get_key()
+
+        if not keyc["ok"]:
+             return keyc
+        
+        user = User(501780776, keyc["key"])
 
         info = user.fetch_info()
 

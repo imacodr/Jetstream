@@ -2,7 +2,7 @@ import os
 import click
 import cmds
 from pathlib import Path
-from config import load_config, save_config
+from config import load_config, save_config, PROJECTS_DIR
 from colorama import Fore, Back, Style
 from robloxFuncs import keyTest
 
@@ -14,13 +14,16 @@ def cli(ctx: click.Context) -> None:
 
     config = load_config()
 
-    ctx.obj = {"config": config}
+    if not os.path.exists(PROJECTS_DIR):
+        os.makedirs(PROJECTS_DIR)
+
+    ctx.obj = {"projects_dir": PROJECTS_DIR, "config": config}
 
 cli.add_command(cmds.create)
 
 @cli.group()
 def roblox():
-    """manage your Jetstream Roblox configurations"""
+    """manage your Roblox configurations"""
 
 @roblox.command()
 @click.option("-k", "--key", prompt="Enter Key", help="Your Roblox Cloud Key", type = str)
@@ -52,4 +55,3 @@ def test():
         click.echo("Link: " + Fore.BLUE + f"https://roblox.com/users/{result["id"]}")
         click.echo("")
         click.echo(Fore.GREEN + "✅ Key Works!")
-
