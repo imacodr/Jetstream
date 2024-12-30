@@ -14,6 +14,9 @@ colorama = "^0.4.6"
 termcolor = "^2.5.0"
 replicate = "^1.0.4"
 ffmpeg-python = "^0.2.0"
+requests = "^2.32.3"
+xmltodict = "^0.14.2"
+inquirer = "^3.4.0"
 
 [build-system]
 requires = ["poetry-core"]

@@ -20,6 +20,7 @@ def cli(ctx: click.Context) -> None:
     ctx.obj = {"projects_dir": PROJECTS_DIR, "config": config}
 
 cli.add_command(cmds.create)
+cli.add_command(cmds.builds)
 
 @cli.group()
 def roblox():
@@ -36,6 +37,18 @@ def set(key):
     save_config(config)
 
     click.echo(Fore.GREEN + "✅ Successfully saved Roblox API Key.")
+
+@roblox.command()
+@click.option("-i", "--id", prompt="Provide the User ID of the uploader (If its a group key, must have permission to use key)", help="The User ID of the uploader", type = str)
+def uploader(id):
+    """Set the uploader for the Roblox assets"""
+    
+    config = load_config()
+    config["uploader"] = id
+    
+    save_config(config)
+
+    click.echo(Fore.GREEN + "✅ Successfully saved Roblox uploader.")
     
 @roblox.command()
 def test():
@@ -55,3 +68,13 @@ def test():
         click.echo("Link: " + Fore.BLUE + f"https://roblox.com/users/{result["id"]}")
         click.echo("")
         click.echo(Fore.GREEN + "✅ Key Works!")
+
+@cli.group()
+def projects():
+    """manage your Jetstream projects"""
+
+@projects.command()
+def view():
+    """View all Jetstream projects"""
+
+
