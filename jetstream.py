@@ -1,10 +1,13 @@
 import os
 import click
 import cmds
+import inquirer
+import json
+
 from pathlib import Path
 from config import load_config, save_config, PROJECTS_DIR
 from colorama import Fore, Back, Style
-from robloxFuncs import keyTest
+from robloxFuncs import keyTest, generate_script
 
 @click.group()
 @click.version_option()
@@ -74,7 +77,73 @@ def projects():
     """manage your Jetstream projects"""
 
 @projects.command()
-def view():
+@click.pass_context
+def view(ctx: click.Context):
     """View all Jetstream projects"""
 
+    projects = ctx.obj["projects_dir"]
+    
+    click.echo("")
+    click.echo(Fore.RED + "🚀 Jetstream Projects")
+    click.echo(Fore.RESET + "")
+
+    for dir in os.listdir(projects):
+        if not str(dir).startswith("."):
+            click.echo(Fore.WHITE + dir + Fore.BLUE + f" ({projects / dir})")
+
+    click.echo("")
+
+
+@projects.command()
+@click.pass_context
+def download(ctx: click.Context):
+    """Download Jetstream script (Must have finished build)"""
+
+    projects = ctx.obj["projects_dir"]
+
+    choices = []
+
+    files = []
+
+    index = 0
+
+    project = 1
+
+    for p in os.walk(projects):
+      file = cmds.find("build.json", p[0])
+      if file != None and index != 0:
+         files.insert(index, file)
+
+         with open(file, "r") as f:
+            jdic = json.load(f)
+
+         project_name = file.split("projects/")
+         if jdic["completed"]:
+            choices.insert(project, str(project) + "." + project_name[1])
+         project = project + 1
+
+      index = index + 1   
+
+    if len(choices) <= 0:
+        click.echo("")
+        click.echo("ℹ️  You don't have any builds completed to download")
+        click.echo("")
+        return
+    
+    questions = [
+      inquirer.List('chosen_build', message = "Select builds", choices=choices)
+    ]
+
+    answers = inquirer.prompt(questions)
+   
+    splitted_answer = answers["chosen_build"].split(".")
+
+    answer_index = int(splitted_answer[0]) - 1
+
+    with open(files[answer_index], "r") as file:
+         data = json.load(file)
+
+    project_dir = files[answer_index].split("/build.json")[0]
+
+    print(project_dir)
 
