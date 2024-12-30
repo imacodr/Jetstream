@@ -39,6 +39,7 @@ def create(ctx: click.Context, input, name, fps, big) -> None:
    click.echo(Fore.RED + "🚀 Jetstream Video Transforming (⏰ Fast)")
    click.echo(Fore.RESET + "")
    paths = transform_video(input, project["path"], fps)
+
    if paths == None:
       return
    click.echo(Fore.GREEN + "✅ Successfully transformed video to frames.")
@@ -92,7 +93,7 @@ def builds(ctx: click.Context):
          if jdic["completed"]:
             choices.insert(project, str(project) + "." + Fore.GREEN + " ✅ Completed - " + project_name[1])
          else:
-            choices.insert(project, str(project) + "." + Fore.YELLOW + " ⚠️ Incomplete - " + project_name[1] + " | Last Step: " + jdic["step"])
+            choices.insert(project, str(project) + "." + Fore.YELLOW + " ⚠️ Incomplete - " + project_name[1] + " | Current Step: " + jdic["step"])
          project = project + 1
 
       index = index + 1   

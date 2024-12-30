@@ -45,7 +45,7 @@ def keyTest():
 def upload_images(projectName, paths, bigProject, project_dir, file_ticker = 1, rb_ids = []):
      try:
           click.echo("")
-          click.echo(Fore.RED + "🚀 Jetstream Roblox Uploading (⏰ May take a while depending on video length)")
+          click.echo(Fore.RED + "🚀 Jetstream Roblox Uploading (⏰ Takes a while depending on length)")
           click.echo("")
           keyc = get_key()
           uplc = get_uploader()
@@ -62,7 +62,7 @@ def upload_images(projectName, paths, bigProject, project_dir, file_ticker = 1, 
 
           for i in range(file_ticker, len(paths)):
                with open(paths[i], "rb") as file:
-                         time.sleep(15 if bigProject else 6) # This is so it doesn't rate limit
+                         time.sleep(10 if bigProject else 6) # This is so it doesn't rate limit
                          operation = user.upload_asset(file, AssetType.Decal, projectName + "_" + "frame" + str(file_ticker), "Uploaded using 🚀 Jetstream")
 
                asset = operation.wait()
@@ -158,7 +158,7 @@ def generate_script(projectName, image_ids, project_dir):
      script_str = into_str + script_str
 
      with open(project_dir / "build.json", "w") as file:
-          json.dump({"step": "done", "completed": False}, file, indent = 4)
+          json.dump({"step": "done", "completed": True}, file, indent = 4)
 
      with open(project_dir / (projectName + ".luau"), "w") as file:
           file.write(script_str)

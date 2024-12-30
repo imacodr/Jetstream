@@ -18,8 +18,10 @@ def transform_video(input, project, fps):
             else:
                 ffmpeg.input(input).output(str(project) + "/frame%d.png").run()
 
-            frame_files = sorted(os.listdir(project))
-            frame_paths = [Path(os.path.join(project, frame_file)) for frame_file in frame_files]
+            frame_files = os.listdir(project)
+            frame_paths = []
+            for i in range(0, len(frame_files)):
+                 frame_paths.insert(i, Path(str(project) + "/frame" + str(i) + ".png"))
 
             return frame_paths
         except Exception as e:
