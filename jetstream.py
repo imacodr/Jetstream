@@ -119,7 +119,7 @@ def download(ctx: click.Context):
 
          project_name = file.split("projects/")
          if jdic["completed"]:
-            choices.insert(project, str(project) + "." + project_name[1])
+            choices.insert(project, str(project) + ". " + project_name[1])
          project = project + 1
 
       index = index + 1   
@@ -145,5 +145,8 @@ def download(ctx: click.Context):
 
     project_dir = files[answer_index].split("/build.json")[0]
 
-    print(project_dir)
+    with open(project_dir + "/image_ids.json", "r") as file:
+        image_ids = json.load(file)
+
+    generate_script(data["project_name"], image_ids, Path(project_dir))
 

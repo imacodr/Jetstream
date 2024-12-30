@@ -158,7 +158,7 @@ def generate_script(projectName, image_ids, project_dir):
      script_str = into_str + script_str
 
      with open(project_dir / "build.json", "w") as file:
-          json.dump({"step": "done", "completed": True}, file, indent = 4)
+          json.dump({"project_name": projectName, "step": "done", "completed": True}, file, indent = 4)
 
      with open(project_dir / (projectName + ".luau"), "w") as file:
           file.write(script_str)
