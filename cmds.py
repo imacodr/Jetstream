@@ -8,6 +8,7 @@ from colorama import Fore, Back, Style
 import inquirer
 from frames import transform_video
 from robloxFuncs import upload_images, get_image_ids, generate_script
+from files import read_file
 
 def createProject(projects_dir, name):
    project_dir = projects_dir / name
@@ -90,27 +91,33 @@ def builds(ctx: click.Context):
             jdic = json.load(f)
 
          project_name = file.split("projects/")
-         if jdic["completed"]:
-            choices.insert(project, str(project) + "." + Fore.GREEN + " ✅ Completed - " + project_name[1])
-         else:
+         if not jdic["completed"]:
             choices.insert(project, str(project) + "." + Fore.YELLOW + " ⚠️ Incomplete - " + project_name[1] + " | Current Step: " + jdic["step"])
          project = project + 1
 
       index = index + 1   
+
+   if len(choices) <= 0:
+       click.echo("")
+       click.echo(Fore.YELLOW + "⚠ You don't have any active builds.")
+       click.echo("")
+       return
 
    questions = [
       inquirer.List('chosen_build', message = "Select builds", choices=choices)
    ]
 
    answers = inquirer.prompt(questions)
+
+   if answers == None:
+      return
    
    splitted_answer = answers["chosen_build"].split(".")
 
    answer_index = int(splitted_answer[0]) - 1
 
-   with open(files[answer_index], "r") as file:
-         data = json.load(file)
-
+   data = read_file(files[answer_index])
+   
    project_dir = files[answer_index].split("/build.json")[0]
 
    match data["step"]:

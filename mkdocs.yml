@@ -1,0 +1,41 @@
+site_name: Jetstream
+site_url: https://imacodr.github.io/Jetstream
+repo_name: imacodr/Jetstream
+repo_url: https://github.com/imacodr/Jetstream
+
+site_author: imacodr
+copyright: imacodr © 2025
+
+theme:
+  name: material
+  custom_dir: docs/assets/overrides
+  logo: assets/logo.png
+  features:
+    - navigation.instant
+    - navigation.tabs
+    - navigation.top
+  palette:
+    primary: black
+    accent: black
+    scheme: slate
+
+extra_css:
+  - stylesheets/extra.css
+
+plugins:
+  - search
+
+extra:
+  version:
+    provider: mike
+
+nav:
+  - Home: index.md
+  - Getting Started: intro.md
+
+markdown_extensions:
+  - attr_list
+  - markdown.extensions.md_in_html
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg

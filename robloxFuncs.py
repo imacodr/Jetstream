@@ -10,6 +10,7 @@ from colorama import Fore, Back, Style
 from termcolor import colored
 
 from config import load_config
+from files import read_file, merge_file, write_file
 
 def get_key():
     config = load_config()
@@ -71,16 +72,13 @@ def upload_images(projectName, paths, bigProject, project_dir, file_ticker = 1, 
                click.echo(Fore.GREEN + "Frame " + str(file_ticker) + " uploaded.")
                click.echo(Fore.BLUE + "Link: " + "https://create.roblox.com/store/asset/" + asset.id)
                click.echo(Fore.RESET + "...")
-               with open(project_dir / "build.json", "w") as file:
-                    json.dump({"project_name": str(projectName), "big_proj": bigProject, "step": "upload_images", "rblx_ids": rblx_ids, "paths": str(paths), "last_file": file_ticker, "completed": False}, file, indent = 4)         
+               merge_file(project_dir / "build.json", {"project_name": str(projectName), "big_proj": bigProject, "step": "upload_images", "rblx_ids": rblx_ids, "paths": str(paths), "last_file": file_ticker, "completed": False})       
                file_ticker = file_ticker + 1  
                
 
-          with open(project_dir / "decal_ids.json", "w") as file:
-               json.dump(rblx_ids, file, indent = 4)
+          write_file(project_dir / "decal_ids.json", rblx_ids)
 
-          with open(project_dir / "build.json", "w") as file:
-                    json.dump({"project_name": str(projectName), "big_proj": bigProject, "step": "image_ids", "rblx_ids": rblx_ids, "paths": str(paths), "last_file": file_ticker, "completed": False}, file, indent = 4)
+          merge_file(project_dir, {"project_name": str(projectName), "big_proj": bigProject, "step": "image_ids", "rblx_ids": rblx_ids, "paths": str(paths), "last_file": file_ticker, "completed": False})
           
           click.echo(Fore.GREEN + "✅ Successfully uploaded all assets to Roblox.")
           return rblx_ids
@@ -88,8 +86,8 @@ def upload_images(projectName, paths, bigProject, project_dir, file_ticker = 1, 
           click.echo("")
           click.echo(Fore.RED + "❌ An error occured: " + str(e))
           click.echo("")
-          with open(project_dir / "build.json", "w") as file:
-               json.dump({"project_name": str(projectName), "big_proj": bigProject, "step": "upload_images", "rblx_ids": rblx_ids, "paths": str(paths), "last_file": file_ticker, "completed": False}, file, indent = 4)         
+          merge_file(project_dir / "build.json", {"project_name": str(projectName), "big_proj": bigProject, "step": "upload_images", "rblx_ids": rblx_ids, "paths": str(paths), "last_file": file_ticker, "completed": False})
+          
           return None
 
 def get_image_ids(id_list, project_dir, project_name):
@@ -120,9 +118,8 @@ def get_image_ids(id_list, project_dir, project_name):
                else:
                     click.echo(Fore.RED + "❌ An error occcurred transforming sDecal IDs to Image IDs: " + Fore.RESET + str(e))
 
-          with open(project_dir / "build.json", "w") as file:
-               json.dump({"project_name": project_name, "step": "script", "img_ids": new_list, "completed": False}, file, indent = 4)
-
+          merge_file(project_dir / "build.json", {"project_name": project_name, "step": "script", "img_ids": new_list, "completed": False})
+          
           with open(project_dir / "image_ids.json", "w") as file:
                json.dump(new_list, file, indent = 4)
 
@@ -131,8 +128,7 @@ def get_image_ids(id_list, project_dir, project_name):
           return new_list
      except requests.exceptions.RequestException as e:
           click.echo(Fore.RED + "❌ An error occcurred transforming Decal IDs to Image IDs: " + Fore.RESET + str(e))
-          with open(project_dir / "build.json", "w") as file:
-               json.dump({"project_name": project_name, "img_ids": new_list, "step": "image_ids", "completed": False}, file, indent = 4)
+          merge_file(project_dir / "build.json", {"project_name": project_name, "img_ids": new_list, "step": "image_ids", "completed": False})
           return None
 
 
@@ -157,8 +153,7 @@ def generate_script(projectName, image_ids, project_dir):
 
      script_str = into_str + script_str
 
-     with open(project_dir / "build.json", "w") as file:
-          json.dump({"project_name": projectName, "step": "done", "completed": True}, file, indent = 4)
+     merge_file(project_dir / "build.json", {"project_name": projectName, "step": "done", "completed": True})
 
      with open(project_dir / (projectName + ".luau"), "w") as file:
           file.write(script_str)
