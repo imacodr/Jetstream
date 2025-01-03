@@ -4,6 +4,4 @@ sidebar_position: 1
 
 # Getting Started
 
-Learn to use Construct and get ready to explore all of our features.
-
-## "Hello World" - Construct
+In this start guide we will guide you through the installation and usage of Jetstream, a utility tool for generating short videos on Roblox.

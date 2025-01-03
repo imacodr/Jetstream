@@ -3,6 +3,7 @@ import click
 import cmds
 import inquirer
 import json
+from showinfm import show_in_file_manager
 
 from pathlib import Path
 from config import load_config, save_config, PROJECTS_DIR
@@ -229,3 +230,51 @@ def generate(ctx: click.Context):
             click.echo("")
             
 
+@projects.command()
+@click.pass_context
+def open(ctx: click.Context):
+    """Open a project in your file manager"""
+    projects = ctx.obj["projects_dir"]
+
+    choices = []
+
+    files = []
+
+    index = 0
+
+    project = 1
+
+    for p in os.walk(projects):
+      file = cmds.find("build.json", p[0])
+      if file != None and index != 0:
+         files.insert(index, file)
+         
+         project_name_split = file.split("projects/")
+         project_name = project_name_split[1].split("/build.json")
+
+         choices.insert(project, str(project) + ". " + project_name[0])
+         project = project + 1
+
+      index = index + 1   
+
+    if len(choices) <= 0:
+        click.echo("")
+        click.echo("ℹ️  You don't have any projects to open")
+        click.echo("")
+        return
+    
+    questions = [
+      inquirer.List('project', message = "Select project", choices=choices),
+    ]
+
+    answers = inquirer.prompt(questions)
+
+    if answers == None:
+        return
+   
+    splitted_answer = answers["project"].split(".")
+
+    answer_index = int(splitted_answer[0]) - 1
+
+    project_dir = files[answer_index].split("/build.json")[0]
+    show_in_file_manager(project_dir)

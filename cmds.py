@@ -70,7 +70,7 @@ def find(name, path):
 @click.command()
 @click.pass_context
 def builds(ctx: click.Context):
-   """access your unfinished or previous Jetstream builds"""
+   """access your unfinished Jetstream builds"""
 
    projects = ctx.obj["projects_dir"]
 

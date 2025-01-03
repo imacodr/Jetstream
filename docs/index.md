@@ -17,8 +17,7 @@ Videos on Roblox, Simplified
 </h2>
 <section markdown>
 <nav id="buttons">
-<a href="./intro.md">Get Started</a>
-<a href="https://github.com/imacodr/Jetstream/releases">Download</a>
+<a href="/Jetstream/intro">Get Started</a>
 </nav>
 </section>
 </section>
