@@ -32,6 +32,17 @@ pip install --user jetstreamcli
 
 <hr />
 
+**Examples**
+
+![example1](https://raw.githubusercontent.com/imacodr/Jetstream/main/assets/example1.mov)
+
+![example2](https://raw.githubusercontent.com/imacodr/Jetstream/main/assets/example2.mov)
+
+![example3](https://raw.githubusercontent.com/imacodr/Jetstream/main/assets/example3.mov)
+
+<hr />
+
+
 [**Help?**](https://discord.gg/UnDCJ6W7dw)
 
 If you have any questions on how Jetstream or Flightpath works, please join the Discord!
