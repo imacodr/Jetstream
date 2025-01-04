@@ -42,4 +42,4 @@ Frame splicing is not exactly the most efficient method of playing a video as yo
 
 ---
 
-Jetstream is maintained and made with :heart: by [imacodr](https://www.roblox.com/users/501780776/profile)
+Jetstream is maintained and made with :heart: by [imacodr](https://www.roblox.com/users/501780776/profile){: target="_blank"}

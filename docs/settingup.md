@@ -15,7 +15,7 @@ To publish assets to Roblox we will need to use Roblox's Open Cloud API meaning 
 
 **This can be done with either a user or a group (If its a user I recommend creating an alternate account as it will heavily trash your dashboard with frames)**
 
-Start by going to [Roblox Creator Dashboard's API Keys](https://create.roblox.com/dashboard/credentials?activeTab=ApiKeysTab)
+Start by going to [Roblox Creator Dashboard's API Keys](https://create.roblox.com/dashboard/credentials?activeTab=ApiKeysTab){: target="_blank"}
 
 ![creator dashboard](assets/robloxapidashboard.jpeg)
 
@@ -104,7 +104,7 @@ It was quite a lot for our API key, but don’t worry, you’re done with that n
 Now its time for us to set the uploader for our frames. This will depend on which type of key you made.
 
 === "User API Key"
-    If you made an API key using an user, either your personal account or an alternative one. You will use that user's ID.
+    If you made an API key using an user account, either your personal account or an alternate one. You will use that user's ID.
 
     Go to your Roblox Profile and look in the URL.
 

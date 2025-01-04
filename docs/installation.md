@@ -12,7 +12,35 @@ In this start guide we will guide you through the installation and usage of Jets
 
 You will require Python version 3.12+ & PyPI (Included in Python) to install the CLI tool.
 
-Install Python using this [link](https://www.python.org/downloads/).
+Install Python using this [link](https://www.python.org/downloads/){: target="_blank"}.
+
+---
+
+## Install ffmpeg
+
+For our frame splicing to do its work you will need to install a tool called ffmpeg.
+
+You can find info on how to install it on its [website](https://www.ffmpeg.org/download.html){: target="_blank"}
+
+Or if you have a package manager it is recommended to use it:
+
+=== "choco (Windows)"
+
+    ```sh
+    choco install ffmpeg
+    ```
+
+=== "homebrew (MacOS)"
+
+    ```sh
+    brew install ffmpeg
+    ```
+
+=== "apt (Ubuntu)"
+
+    ```sh
+    sudo apt install ffmpeg
+    ```
 
 ---
 

@@ -7,4 +7,4 @@ This module is the Roblox side of Jetstream and enables you to load, play, and m
 
 ## GitHub
 
-The source code for Flightpath can be found here: [https://github.com/imacodr/Flightpath](https://github.com/imacodr/Flightpath)
+The source code for Flightpath can be found here: [https://github.com/imacodr/Flightpath](https://github.com/imacodr/Flightpath){: target="_blank"}
