@@ -43,7 +43,7 @@ def keyTest():
     except:
         return {"ok": False, "msg": Fore.RED + "❌ An error occured. Key may be invalid or no permissions have been given."}
     
-def upload_images(projectName, paths, bigProject, project_dir, file_ticker = 1, rb_ids = []):
+def upload_images(project_name, paths, big_project, project_dir, file_ticker = 1, rblx_ids = []):
      try:
           click.echo("")
           click.echo(Fore.RED + "🚀 Jetstream Roblox Uploading (⏰ Takes a while depending on length)")
@@ -58,13 +58,11 @@ def upload_images(projectName, paths, bigProject, project_dir, file_ticker = 1, 
                return uplc
           
           user = User(uplc["uploader"], keyc["key"])
-
-          rblx_ids = rb_ids
-
-          for i in range(file_ticker, len(paths)):
+          
+          for i in range(file_ticker, len(paths) + 1):
                with open(paths[i], "rb") as file:
-                         time.sleep(10 if bigProject else 6) # This is so it doesn't rate limit
-                         operation = user.upload_asset(file, AssetType.Decal, projectName + "_" + "frame" + str(file_ticker), "Uploaded using 🚀 Jetstream")
+                         time.sleep(10 if big_project else 6) # This is so it doesn't rate limit
+                         operation = user.upload_asset(file, AssetType.Decal, project_name + "_" + "frame" + str(file_ticker), "Uploaded using 🚀 Jetstream")
 
                asset = operation.wait()
 
@@ -72,13 +70,13 @@ def upload_images(projectName, paths, bigProject, project_dir, file_ticker = 1, 
                click.echo(Fore.GREEN + "Frame " + str(file_ticker) + " uploaded.")
                click.echo(Fore.BLUE + "Link: " + "https://create.roblox.com/store/asset/" + asset.id)
                click.echo(Fore.RESET + "...")
-               merge_file(project_dir / "build.json", {"project_name": str(projectName), "big_proj": bigProject, "step": "upload_images", "rblx_ids": rblx_ids, "paths": str(paths), "last_file": file_ticker, "completed": False})       
+               merge_file(project_dir / "build.json", {"project_name": str(project_name), "big_proj": big_project, "step": "upload_images", "rblx_ids": rblx_ids, "paths": str(paths), "last_file": file_ticker, "completed": False})       
                file_ticker = file_ticker + 1  
                
 
           write_file(project_dir / "decal_ids.json", rblx_ids)
-
-          merge_file(project_dir, {"project_name": str(projectName), "big_proj": bigProject, "step": "image_ids", "rblx_ids": rblx_ids, "paths": str(paths), "last_file": file_ticker, "completed": False})
+          
+          merge_file(project_dir / "build.json", {"project_name": str(project_name), "big_proj": big_project, "step": "image_ids", "rblx_ids": rblx_ids, "paths": str(paths), "last_file": file_ticker, "completed": False})
           
           click.echo(Fore.GREEN + "✅ Successfully uploaded all assets to Roblox.")
           return rblx_ids
@@ -86,7 +84,7 @@ def upload_images(projectName, paths, bigProject, project_dir, file_ticker = 1, 
           click.echo("")
           click.echo(Fore.RED + "❌ An error occured: " + str(e))
           click.echo("")
-          merge_file(project_dir / "build.json", {"project_name": str(projectName), "big_proj": bigProject, "step": "upload_images", "rblx_ids": rblx_ids, "paths": str(paths), "last_file": file_ticker, "completed": False})
+          merge_file(project_dir / "build.json", {"project_name": str(project_name), "big_proj": big_project, "step": "upload_images", "rblx_ids": rblx_ids, "paths": str(paths), "last_file": file_ticker, "completed": False})
           
           return None
 
@@ -127,7 +125,7 @@ def get_image_ids(id_list, project_dir, project_name):
 
           return new_list
      except requests.exceptions.RequestException as e:
-          click.echo(Fore.RED + "❌ An error occcurred transforming Decal IDs to Image IDs: " + Fore.RESET + str(e))
+          click.echo(Fore.RED + "❌ An error occcurred transforming Decal IDs to Image IDs: " + Fore.RESET + str(e.response))
           merge_file(project_dir / "build.json", {"project_name": project_name, "img_ids": new_list, "step": "image_ids", "completed": False})
           return None
 
@@ -136,7 +134,7 @@ def generate_script(projectName, image_ids, project_dir):
      click.echo("")
      click.echo(Fore.RED + "🚀 Jetstream Script Generation (⏰ Very Fast)")
      click.echo("")
-     into_str = f"--[[\n🚀 Jetstream Video\n\nProject: {projectName}\nGenerated on {str(datetime.datetime.now())}\n\nPlay this video using 🛩️ Flightplan\n]]--\n\n"
+     into_str = f"--[[\n🚀 Jetstream Video\n\nProject: {projectName}\nGenerated on {str(datetime.datetime.now())}\n\nPlay this video using 🛩️ Flightpath\n]]--\n\n"
      script_str = "return {"
 
      image_ticker = 0
@@ -158,7 +156,7 @@ def generate_script(projectName, image_ids, project_dir):
      with open(project_dir / (projectName + ".luau"), "w") as file:
           file.write(script_str)
           click.echo("")
-          click.echo(Fore.BLUE + "Flightplan Script created at " + file.name)
+          click.echo(Fore.BLUE + "Flightpath Script created at " + file.name)
           click.echo(Fore.BLUE + "Or copy below: ")
           click.echo(Fore.RESET + "")
 

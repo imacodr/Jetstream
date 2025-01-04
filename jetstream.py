@@ -15,7 +15,7 @@ from files import read_file, write_file
 @click.version_option()
 @click.pass_context
 def cli(ctx: click.Context) -> None:
-    """🚀 Jetstream - Roblox utility tool for converting videos/gifs into frames for importing into Roblox"""\
+    """🚀 Jetstream - Roblox utility tool for converting videos/gifs into frames for importing into Roblox"""
 
     config = load_config()
 
@@ -115,10 +115,9 @@ def download(ctx: click.Context):
       file = cmds.find("build.json", p[0])
       if file != None and index != 0:
          files.insert(index, file)
-
-         with open(file, "r") as f:
-            jdic = json.load(f)
-
+         
+         jdic = read_file(file)
+         
          project_name = file.split("projects/")
          if jdic["completed"]:
             choices.insert(project, str(project) + ". " + project_name[1])
@@ -144,14 +143,12 @@ def download(ctx: click.Context):
     splitted_answer = answers["chosen_build"].split(".")
 
     answer_index = int(splitted_answer[0]) - 1
-
-    with open(files[answer_index], "r") as file:
-         data = json.load(file)
+    
+    data = read_file(files[answer_index])
 
     project_dir = files[answer_index].split("/build.json")[0]
 
-    with open(project_dir + "/image_ids.json", "r") as file:
-        image_ids = json.load(file)
+    image_ids = read_file(project_dir + "/image_ids.json")
 
     generate_script(data["project_name"], image_ids, Path(project_dir))
 
@@ -174,10 +171,9 @@ def generate(ctx: click.Context):
       file = cmds.find("build.json", p[0])
       if file != None and index != 0:
          files.insert(index, file)
-
-         with open(file, "r") as f:
-            jdic = json.load(f)
-
+         
+         jdic = read_file(file)
+         
          project_name = file.split("projects/")
          if jdic["completed"]:
             choices.insert(project, str(project) + ". " + project_name[1])
@@ -200,20 +196,27 @@ def generate(ctx: click.Context):
 
     if answers == None:
         return
+    
+    if not click.confirm("⚠️ Are you sure you want to continue? (This will generate a new build)"):
+        click.echo("Cancelled.")
+        return
    
     splitted_answer = answers["chosen_build"].split(".")
 
     answer_index = int(splitted_answer[0]) - 1
 
-    with open(files[answer_index], "r") as file:
-         data = json.load(file)
-
+    data = read_file(files[answer_index])
+    
     project_dir = files[answer_index].split("/build.json")[0]
 
     match answers["type"]:
         case "decal_ids":
             decal_ids = upload_images(data["project_name"], data["paths"], data["big_proj"], Path(project_dir))
+            if decal_ids == None:
+                return
             image_ids = get_image_ids(decal_ids, Path(project_dir), data["project_name"])
+            if image_ids == None:
+                return
             generate_script(data["project_name"], image_ids, Path(project_dir))
 
             click.echo("")
@@ -221,7 +224,8 @@ def generate(ctx: click.Context):
             click.echo("")
         case "image_ids":
             decal_ids = read_file(project_dir + "/decal_ids.json")
-            
+            if decal_ids == None:
+                return
             image_ids = get_image_ids(decal_ids, Path(project_dir), data["project_name"])
             generate_script(data["project_name"], image_ids, Path(project_dir))
 
@@ -257,15 +261,19 @@ def open(ctx: click.Context):
 
       index = index + 1   
 
+
     if len(choices) <= 0:
         click.echo("")
         click.echo("ℹ️  You don't have any projects to open")
         click.echo("")
         return
     
+    choices.append(str(len(choices) + 1) + ". 📁 Projects Folder")
+
     questions = [
       inquirer.List('project', message = "Select project", choices=choices),
     ]
+    
 
     answers = inquirer.prompt(questions)
 
@@ -273,6 +281,10 @@ def open(ctx: click.Context):
         return
    
     splitted_answer = answers["project"].split(".")
+
+    if int(splitted_answer[0]) == len(choices):
+        show_in_file_manager(str(projects))
+        return
 
     answer_index = int(splitted_answer[0]) - 1
 

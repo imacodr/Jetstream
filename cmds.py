@@ -20,14 +20,18 @@ def createProject(projects_dir, name):
 
    return {"ok": True, "path": project_dir}
 
+def find(name, path):
+   for root, dirs, files in os.walk(path):
+      if name in files:
+         return os.path.join(root, name)
 
 @click.command()
-@click.option("-i", "--input", prompt="Provide path to video (You can drag it here!)", help="Video to create project", type=str)
 @click.option("-n", "--name", prompt="Name your project", help="Name for the project", type=str)
+@click.option("-i", "--input", prompt="Provide path to video (You can drag it here!)", help="Video to create project", type=str)
 @click.option("-f", "--fps", default=0, help="FPS for the video", type=int)
 @click.option("-b", "--big", default=False, help="Big project (Will take longer but prevents ratelimit)", type=bool)
 @click.pass_context
-def create(ctx: click.Context, input, name, fps, big) -> None: 
+def create(ctx: click.Context, name: str, input: str, fps: int, big: bool) -> None: 
    """create a Jetstream project"""
    
    project = createProject(ctx.obj["projects_dir"], name)
@@ -60,12 +64,6 @@ def create(ctx: click.Context, input, name, fps, big) -> None:
    click.echo("")
    click.echo(Fore.RED + "🚀 Jetstream project created successfuly! Access information using " + colored("jetstream projects", "black", "on_red"))
    click.echo("")
-
-
-def find(name, path):
-    for root, dirs, files in os.walk(path):
-        if name in files:
-            return os.path.join(root, name)
 
 @click.command()
 @click.pass_context
