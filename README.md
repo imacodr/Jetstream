@@ -34,11 +34,17 @@ pip install --user jetstreamcli
 
 **Examples**
 
-![example1](https://raw.githubusercontent.com/imacodr/Jetstream/main/assets/example1.mov)
+<video width="500" height="340" controls>
+  <source src="https://raw.githubusercontent.com/imacodr/Jetstream/main/assets/example1.mov" type="video/mp4">
+</video>
 
-![example2](https://raw.githubusercontent.com/imacodr/Jetstream/main/assets/example2.mov)
+<video width="500" height="340" controls>
+  <source src="https://raw.githubusercontent.com/imacodr/Jetstream/main/assets/example2.mov" type="video/mp4">
+</video>
 
-![example3](https://raw.githubusercontent.com/imacodr/Jetstream/main/assets/example3.mov)
+<video width="500" height="340" controls>
+  <source src="https://raw.githubusercontent.com/imacodr/Jetstream/main/assets/example3.mov" type="video/mp4">
+</video>
 
 <hr />
 
