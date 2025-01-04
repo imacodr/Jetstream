@@ -2,8 +2,8 @@ import click
 import inquirer
 
 from colorama import Fore
-from .config import load_config, save_config
-from .robloxfuncs import keyTest
+from jetstreamcli.config import load_config, save_config
+from jetstreamcli.robloxfuncs import keyTest
 
 @click.command()
 @click.option("-k", "--key", prompt="Enter Key", help="Your Roblox Cloud Key", type = str)

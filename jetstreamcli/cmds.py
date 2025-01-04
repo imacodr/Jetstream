@@ -7,9 +7,9 @@ from pathlib import Path, PosixPath
 from termcolor import colored
 from colorama import Fore
 import inquirer
-from .frames import transform_video
-from .robloxfuncs import upload_images, get_image_ids, generate_script
-from .files import read_file
+from jetstreamcli.frames import transform_video
+from jetstreamcli.robloxfuncs import upload_images, get_image_ids, generate_script
+from jetstreamcli.files import read_file
 
 regex = r"([a-zA-Z]+) (\d+)"
 

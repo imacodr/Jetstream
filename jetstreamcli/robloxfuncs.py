@@ -9,8 +9,8 @@ from rblxopencloud import User, AssetType, Group
 from colorama import Fore, Back, Style
 from termcolor import colored
 
-from .config import load_config
-from .files import merge_file, write_file
+from jetstreamcli.config import load_config
+from jetstreamcli.files import merge_file, write_file
 
 def get_key():
     config = load_config()

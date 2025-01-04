@@ -1,10 +1,10 @@
 import os
 import click
 
-from .config import load_config, PROJECTS_DIR
-from .cmds import create, builds
-from .robloxcmds import set,uploader,test
-from .projectscmds import view, open, generate, download
+from jetstreamcli.config import load_config, PROJECTS_DIR
+from jetstreamcli.cmds import create, builds
+from jetstreamcli.robloxcmds import set,uploader,test
+from jetstreamcli.projectscmds import view, open, generate, download
 
 @click.group()
 @click.version_option()

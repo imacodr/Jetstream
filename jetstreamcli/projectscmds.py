@@ -5,9 +5,9 @@ from showinfm import show_in_file_manager
 
 from pathlib import Path
 from colorama import Fore
-from .robloxfuncs import generate_script, get_image_ids, upload_images
-from .files import read_file
-from .cmds import find
+from jetstreamcli.robloxfuncs import generate_script, get_image_ids, upload_images
+from jetstreamcli.files import read_file
+from jetstreamcli.cmds import find
 
 @click.command()
 @click.pass_context

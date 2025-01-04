@@ -1,9 +1,12 @@
 [tool.poetry]
 name = "jetstreamcli"
-version = "0.1.1"
+version = "0.1.21"
 description = "Roblox utility tool for converting videos/gifs into frames for importing into Roblox"
 authors = ["Sam Perillo <sam@perillo.dev>"]
 readme = "README.md"
+packages = [
+    { include = "jetstreamcli" },
+]
 
 [tool.poetry.dependencies]
 python = "^3.13"
