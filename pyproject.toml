@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "jetstreamcli"
-version = "0.1.21"
+version = "0.1.22"
 description = "Roblox utility tool for converting videos/gifs into frames for importing into Roblox"
 authors = ["Sam Perillo <sam@perillo.dev>"]
 readme = "README.md"
@@ -9,7 +9,7 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.13"
+python = "^3.10"
 click = "^8.1.8"
 rblx-open-cloud = "^2.1.4"
 colorama = "^0.4.6"

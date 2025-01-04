@@ -10,7 +10,7 @@ In this start guide we will guide you through the installation and usage of Jets
 
 ## Install Python
 
-You will require Python version 3.13+ & PyPI (Included in Python) to install the CLI tool.
+You will require Python version 3.10+ & PyPI (Included in Python) to install the CLI tool.
 
 Install Python using this [link](https://www.python.org/downloads/).
 
