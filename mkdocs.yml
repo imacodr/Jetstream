@@ -66,6 +66,10 @@ nav:
         - view: commands/projectsview.md
   - 🛩️ Flightpath:
       - Intro: flightpath/intro.md
+      - Installation: flightpath/installation.md
+      - Time to Fly!: flightpath/fly.md
+      - API: flightpath/api.md
+  - Community and Help: community.md
 
 markdown_extensions:
   - attr_list

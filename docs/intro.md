@@ -28,4 +28,18 @@ However, for higher-earning developers whose Roblox videos are within budget, I 
 
 ---
 
+## Why did I choose this method?
+
+Bringing this to attention, I've seen methods such as loading external images (and GIFs) by parsing their binary data and redrawing the image. However, Roblox has publicly adressed that this method is against their policies and would not pass moderation. Frame splicing has been around on Roblox for a while and it is allowed but its always been a hastle.
+
+---
+
+## Disadvantages
+
+I won't lie that there are disadvantages for Jetstream.
+
+Frame splicing is not exactly the most efficient method of playing a video as you can probably guess. It is very much a *cheaty* way of putting videos on Roblox. There are many limitations that I won't discuss, specially perfomance wise that might require you to do a bit of tweaking to achieve good performance times with long videos. However, short videos have been shown to work pretty well.
+
+---
+
 Jetstream is maintained and made with :heart: by [imacodr](https://www.roblox.com/users/501780776/profile)

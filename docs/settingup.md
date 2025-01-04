@@ -50,7 +50,7 @@ Once you are ready, press the `Save & Generate Key` button.
 Your API key will appear at the bottom, click the `Copy Key to Clipboard`
 
 !!! warning
-    Be careful, as soon as you exit the creation screen you won't be able to copy your key again and will need to remake the key.
+    Be careful, as soon as you exit the creation screen you won't be able to copy your key again and will need to regenerate the key.
 
 ![api confirmation](assets/robloxapikeyconfirm.png)
 

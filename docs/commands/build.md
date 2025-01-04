@@ -1,4 +1,4 @@
-# Build
+# builds
 access your unfinished Jetstream builds
 
 ### Command

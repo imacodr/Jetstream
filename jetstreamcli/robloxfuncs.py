@@ -64,7 +64,7 @@ def upload_images(project_name, paths, big_project, project_dir, file_ticker = 1
           else:
                user = User(uplc["uploader"], keyc["key"])
           
-          for i in range(file_ticker, len(paths) + 1):
+          for i in range(file_ticker, len(paths)):
                with open(paths[i], "rb") as file:
                          time.sleep(10 if big_project else 6) # This is so it doesn't rate limit
                          operation = user.upload_asset(file, AssetType.Decal, project_name + "_" + "frame" + str(file_ticker), "Uploaded using 🚀 Jetstream")
