@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-template = {"robloxKey": None, "uploader": None}
+template = {"robloxKey": None, "uploader": None, "groupKey": False}
 
 TOOL_DIR = Path.home() / ".jetstream"
 PROJECTS_DIR = TOOL_DIR / "projects"

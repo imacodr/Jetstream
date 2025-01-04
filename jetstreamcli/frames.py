@@ -1,10 +1,10 @@
 import os
 import click
 import json
-from colorama import Fore, Back, Style
-from termcolor import colored
-from pathlib import Path
 import ffmpeg
+
+from colorama import Fore
+from pathlib import Path
 
 def transform_video(input, project, fps):
         try:

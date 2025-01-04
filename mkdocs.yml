@@ -13,26 +13,59 @@ theme:
   favicon: assets/logo.png
   features:
     - navigation.instant
+    - navigation.instant.progress
     - navigation.tabs
     - navigation.top
+    - navigation.footer
+    - content.code.copy
+    - content.tabs.link
   palette:
     primary: black
     accent: black
     scheme: slate
+
+extra:
+  social:
+    - icon: fontawesome/brands/x-twitter
+      link: https://x.com/imacodr
+    - icon: fontawesome/brands/discord
+      link: https://discord.gg/UnDCJ6W7dw
+    - icon: fontawesome/brands/guilded
+      link: https://guilded.gg/sudo-labs
 
 extra_css:
   - stylesheets/extra.css
 
 plugins:
   - search
-
-extra:
-  version:
-    provider: mike
+  - glightbox:
+      width: 80%
+      manual: true
 
 nav:
   - Home: index.md
-  - Getting Started: intro.md
+  - Getting Started:
+      - Intro: intro.md
+      - Installation: installation.md
+      - API Key and Uploader: settingup.md
+      - Your First Project!: firstproject.md
+      - Builds: builds.md
+      - Playing Videos: playingmovies.md
+  - Commands:
+      - jetstream: commands/commands.md
+      - create: commands/create.md
+      - builds: commands/build.md
+      - roblox:
+        - set: commands/robloxset.md
+        - test: commands/robloxtest.md
+        - uploader: commands/robloxuploader.md
+      - projects:
+        - download: commands/projectsdownload.md
+        - generate: commands/projectsgenerate.md
+        - open: commands/projectsopen.md
+        - view: commands/projectsview.md
+  - 🛩️ Flightpath:
+      - Intro: flightpath/intro.md
 
 markdown_extensions:
   - attr_list
@@ -40,3 +73,19 @@ markdown_extensions:
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - md_in_html
+  - pymdownx.blocks.caption
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - tables

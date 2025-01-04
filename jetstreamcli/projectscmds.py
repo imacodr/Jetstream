@@ -1,84 +1,15 @@
 import os
 import click
-import cmds
 import inquirer
-import json
 from showinfm import show_in_file_manager
 
 from pathlib import Path
-from config import load_config, save_config, PROJECTS_DIR
-from colorama import Fore, Back, Style
-from robloxFuncs import keyTest, generate_script, get_image_ids, upload_images
-from files import read_file, write_file
+from colorama import Fore
+from .robloxfuncs import generate_script, get_image_ids, upload_images
+from .files import read_file
+from .cmds import find
 
-@click.group()
-@click.version_option()
-@click.pass_context
-def cli(ctx: click.Context) -> None:
-    """🚀 Jetstream - Roblox utility tool for converting videos/gifs into frames for importing into Roblox"""
-
-    config = load_config()
-
-    if not os.path.exists(PROJECTS_DIR):
-        os.makedirs(PROJECTS_DIR)
-
-    ctx.obj = {"projects_dir": PROJECTS_DIR, "config": config}
-
-cli.add_command(cmds.create)
-cli.add_command(cmds.builds)
-
-@cli.group()
-def roblox():
-    """manage your Roblox configurations"""
-
-@roblox.command()
-@click.option("-k", "--key", prompt="Enter Key", help="Your Roblox Cloud Key", type = str)
-def set(key):
-    """Set the Roblox Cloud API Key"""
-    
-    config = load_config()
-    config["robloxKey"] = key
-    
-    save_config(config)
-
-    click.echo(Fore.GREEN + "✅ Successfully saved Roblox API Key.")
-
-@roblox.command()
-@click.option("-i", "--id", prompt="Provide the User ID of the uploader (If its a group key, must have permission to use key)", help="The User ID of the uploader", type = str)
-def uploader(id):
-    """Set the uploader for the Roblox assets"""
-    
-    config = load_config()
-    config["uploader"] = id
-    
-    save_config(config)
-
-    click.echo(Fore.GREEN + "✅ Successfully saved Roblox uploader.")
-    
-@roblox.command()
-def test():
-    """Test your current key"""
-    result = keyTest()
-
-    if not result["ok"]:
-        click.echo(result["msg"])
-    else:
-        click.echo("")
-        click.echo(Fore.RED + "🚀 Jetstream Key Test")
-        click.echo("")
-        click.echo(Fore.CYAN + "User found!")
-        click.echo("")
-        click.echo(Fore.RESET + "Id: " + str(result["id"]))
-        click.echo("Username: " + str(result["username"]))
-        click.echo("Link: " + Fore.BLUE + f"https://roblox.com/users/{result["id"]}")
-        click.echo("")
-        click.echo(Fore.GREEN + "✅ Key Works!")
-
-@cli.group()
-def projects():
-    """manage your Jetstream projects"""
-
-@projects.command()
+@click.command()
 @click.pass_context
 def view(ctx: click.Context):
     """View all Jetstream projects"""
@@ -96,7 +27,7 @@ def view(ctx: click.Context):
     click.echo("")
 
 
-@projects.command()
+@click.command()
 @click.pass_context
 def download(ctx: click.Context):
     """Download Jetstream script (Must have finished build)"""
@@ -112,7 +43,7 @@ def download(ctx: click.Context):
     project = 1
 
     for p in os.walk(projects):
-      file = cmds.find("build.json", p[0])
+      file = find("build.json", p[0])
       if file != None and index != 0:
          files.insert(index, file)
          
@@ -152,7 +83,7 @@ def download(ctx: click.Context):
 
     generate_script(data["project_name"], image_ids, Path(project_dir))
 
-@projects.command()
+@click.command()
 @click.pass_context
 def generate(ctx: click.Context):
     """Re-generate Decal IDs or Image IDs (Must have finished build)"""
@@ -168,7 +99,7 @@ def generate(ctx: click.Context):
     project = 1
 
     for p in os.walk(projects):
-      file = cmds.find("build.json", p[0])
+      file = find("build.json", p[0])
       if file != None and index != 0:
          files.insert(index, file)
          
@@ -220,7 +151,7 @@ def generate(ctx: click.Context):
             generate_script(data["project_name"], image_ids, Path(project_dir))
 
             click.echo("")
-            click.echo(Fore.RED + "🚀 Regenerated Image IDs and Script")
+            click.echo(Fore.RED + "🚀 Sucessfully regenerated Decal IDs")
             click.echo("")
         case "image_ids":
             decal_ids = read_file(project_dir + "/decal_ids.json")
@@ -230,11 +161,11 @@ def generate(ctx: click.Context):
             generate_script(data["project_name"], image_ids, Path(project_dir))
 
             click.echo("")
-            click.echo(Fore.RED + "🚀 Regenerated Image IDs and Script")
+            click.echo(Fore.RED + "🚀 Successfully regenerated Image IDs and Script")
             click.echo("")
             
 
-@projects.command()
+@click.command()
 @click.pass_context
 def open(ctx: click.Context):
     """Open a project in your file manager"""
@@ -249,7 +180,7 @@ def open(ctx: click.Context):
     project = 1
 
     for p in os.walk(projects):
-      file = cmds.find("build.json", p[0])
+      file = find("build.json", p[0])
       if file != None and index != 0:
          files.insert(index, file)
          
@@ -269,7 +200,7 @@ def open(ctx: click.Context):
         return
     
     choices.append(str(len(choices) + 1) + ". 📁 Projects Folder")
-
+    
     questions = [
       inquirer.List('project', message = "Select project", choices=choices),
     ]

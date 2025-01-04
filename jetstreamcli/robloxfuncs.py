@@ -5,12 +5,12 @@ import requests
 import xmltodict
 import json
 
-from rblxopencloud import User, AssetType
+from rblxopencloud import User, AssetType, Group
 from colorama import Fore, Back, Style
 from termcolor import colored
 
-from config import load_config
-from files import read_file, merge_file, write_file
+from .config import load_config
+from .files import merge_file, write_file
 
 def get_key():
     config = load_config()
@@ -26,7 +26,7 @@ def get_uploader():
      if config["uploader"] == None:
            return {"ok": False, "msg": Fore.YELLOW + "⚠️ You don't have an uploader! Set your uploader using " + colored("jetstream roblox login", "black", "on_yellow")}
      
-     return {"ok": True, "uploader": config["uploader"]}
+     return {"ok": True, "uploader": config["uploader"], "group": config["groupKey"]}
 
 def keyTest():
     try:
@@ -57,7 +57,12 @@ def upload_images(project_name, paths, big_project, project_dir, file_ticker = 1
           if not uplc["ok"]:
                return uplc
           
-          user = User(uplc["uploader"], keyc["key"])
+          
+        
+          if uplc["group"]:
+               user = Group(uplc["uploader"], keyc["key"])
+          else:
+               user = User(uplc["uploader"], keyc["key"])
           
           for i in range(file_ticker, len(paths) + 1):
                with open(paths[i], "rb") as file:
@@ -114,7 +119,7 @@ def get_image_ids(id_list, project_dir, project_name):
                     click.echo(Fore.RESET + "...")
                     id_ticker = id_ticker + 1
                else:
-                    click.echo(Fore.RED + "❌ An error occcurred transforming sDecal IDs to Image IDs: " + Fore.RESET + str(e))
+                    click.echo(Fore.RED + "❌ An error occcurred transforming Decal IDs to Image IDs" + Fore.RESET)
 
           merge_file(project_dir / "build.json", {"project_name": project_name, "step": "script", "img_ids": new_list, "completed": False})
           

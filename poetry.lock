@@ -948,6 +948,17 @@ platformdirs = ">=2.2.0"
 pyyaml = ">=5.1"
 
 [[package]]
+name = "mkdocs-glightbox"
+version = "0.4.0"
+description = "MkDocs plugin supports image lightbox with GLightbox."
+optional = false
+python-versions = "*"
+files = [
+    {file = "mkdocs-glightbox-0.4.0.tar.gz", hash = "sha256:392b34207bf95991071a16d5f8916d1d2f2cd5d5bb59ae2997485ccd778c70d9"},
+    {file = "mkdocs_glightbox-0.4.0-py3-none-any.whl", hash = "sha256:e0107beee75d3eb7380ac06ea2d6eac94c999eaa49f8c3cbab0e7be2ac006ccf"},
+]
+
+[[package]]
 name = "mkdocs-material"
 version = "9.5.49"
 description = "Documentation that simply works"
@@ -1554,13 +1565,13 @@ pyyaml = "*"
 
 [[package]]
 name = "rblx-open-cloud"
-version = "2.1.4"
+version = "2.1.5"
 description = "API wrapper for Roblox Open Cloud"
 optional = false
 python-versions = ">=3.9.0"
 files = [
-    {file = "rblx_open_cloud-2.1.4-py3-none-any.whl", hash = "sha256:a2b269f1985ba05d7b65bed4b1dca5db5520060a5b409733202b4aaccea9fbb5"},
-    {file = "rblx_open_cloud-2.1.4.tar.gz", hash = "sha256:715de64d0f1ce518e360ea65b8e2117d154bc03400ca4ffea20402204e79f8f0"},
+    {file = "rblx_open_cloud-2.1.5-py3-none-any.whl", hash = "sha256:628780847721a802d992dd42a7f69148d889dd7bd321e471a608f8130d56c6f9"},
+    {file = "rblx_open_cloud-2.1.5.tar.gz", hash = "sha256:86e7a43b42b0d80be3e5d137883086f32a24e2fa4a3fe2d0ef715b77397374f1"},
 ]
 
 [package.dependencies]
@@ -2117,4 +2128,4 @@ propcache = ">=0.2.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.13"
-content-hash = "ac9f3c163fa57722ea4a1764a8803a21812f07c269c6e5885fd2e8fee222b1cb"
+content-hash = "85218050449926ae48716044557b040d1b1a026c4568ae30a221f92360e70c99"

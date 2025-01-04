@@ -1,14 +1,17 @@
 import os
 import click
 import json
+import re
 
 from pathlib import Path, PosixPath
 from termcolor import colored
-from colorama import Fore, Back, Style
+from colorama import Fore
 import inquirer
-from frames import transform_video
-from robloxFuncs import upload_images, get_image_ids, generate_script
-from files import read_file
+from .frames import transform_video
+from .robloxfuncs import upload_images, get_image_ids, generate_script
+from .files import read_file
+
+regex = r"([a-zA-Z]+) (\d+)"
 
 def createProject(projects_dir, name):
    project_dir = projects_dir / name
@@ -24,6 +27,9 @@ def find(name, path):
    for root, dirs, files in os.walk(path):
       if name in files:
          return os.path.join(root, name)
+      
+def remove_special_chars(text):
+    return re.sub(r'[^\w\s]@!', '', text)  
 
 @click.command()
 @click.option("-n", "--name", prompt="Name your project", help="Name for the project", type=str)
@@ -34,7 +40,13 @@ def find(name, path):
 def create(ctx: click.Context, name: str, input: str, fps: int, big: bool) -> None: 
    """create a Jetstream project"""
    
-   project = createProject(ctx.obj["projects_dir"], name)
+   config = ctx.obj["config"]
+   
+   if config["robloxKey"] == None or config["uploader"] == None:
+      click.echo(Fore.YELLOW + "⚠️ You must set an API key and uploader before creating projcets.")
+      return
+   
+   project = createProject(ctx.obj["projects_dir"], remove_special_chars(name))
 
    if not project["ok"]:
       click.echo(project["msg"])
@@ -141,10 +153,3 @@ def builds(ctx: click.Context):
             generate_script(data["project_name"], image_ids, Path(project_dir))
       case "script":
             generate_script(data["project_name"], data["img_ids"], Path(project_dir))
-         
-
-
-
-
-   
-   

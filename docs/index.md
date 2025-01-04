@@ -4,6 +4,7 @@
   hide:
     - toc
     - navigation
+    - footer
 ---
 
 <div id="container" markdown>
@@ -22,6 +23,3 @@ Videos on Roblox, Simplified
 </section>
 </section>
 </div>
-<aside>
-Created by imacodr & Sudo Labs
-</aside>

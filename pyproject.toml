@@ -1,9 +1,8 @@
 [tool.poetry]
-name = "jetstream"
-version = "0.1.0"
+name = "jetstreamcli"
+version = "0.1.1"
 description = "Roblox utility tool for converting videos/gifs into frames for importing into Roblox"
 authors = ["Sam Perillo <sam@perillo.dev>"]
-license = "LICENSE.md"
 readme = "README.md"
 
 [tool.poetry.dependencies]
@@ -22,10 +21,11 @@ show-in-file-manager = "^1.1.5"
 
 [tool.poetry.dev-dependencies]
 mkdocs-material = "^9.5.49"
+mkdocs-glightbox = "^0.4.0"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-jetstream = "jetstream:cli"
+jetstream = "jetstreamcli.jetstream:cli"
