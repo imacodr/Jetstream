@@ -51,6 +51,7 @@ nav:
       - Your First Project!: firstproject.md
       - Builds: builds.md
       - Playing Videos: playingmovies.md
+      - Examples: examples.md
   - Commands:
       - jetstream: commands/commands.md
       - create: commands/create.md

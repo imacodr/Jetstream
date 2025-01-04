@@ -27,6 +27,10 @@ Name your project:
 
 Afterwards you will be prompted for your video path. **This can be a LINK or a LOCAL FILE**
 
+Here is one you can use if you'd like to test
+
+[https://media.tenor.com/u5C5L37eNkQAAAAi/hello-hi.gif](https://media.tenor.com/u5C5L37eNkQAAAAi/hello-hi.gif)
+
 ```
 Provide path to video (You can drag it here!):
 ```
