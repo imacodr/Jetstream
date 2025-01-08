@@ -63,6 +63,6 @@ def test():
         click.echo("")
         click.echo(Fore.RESET + "Id: " + str(result["id"]))
         click.echo("Username: " + str(result["username"]))
-        click.echo("Link: " + Fore.BLUE + f"https://roblox.com/users/{result["id"]}")
+        click.echo("Link: " + Fore.BLUE + f"https://roblox.com/users/{result['id']}")
         click.echo("")
         click.echo(Fore.GREEN + "✅ Key Works!")
