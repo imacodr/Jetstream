@@ -7,12 +7,15 @@ local Flightpath = require(path/to/Flightstream)
 
 local myVideo = require(path/to/video)
 
-local imageLabel = Instance.new("ImageLabel")
-imageLabel.Parent = game.StarterGui
+local screenGui = Instance.new("ScreenGui", game.Player.LocalPlayer.PlayerGui)
+local imageLabel = Instance.new("ImageLabel", screenGui)
+
+screenGui.IgnoreGuiInset = true
+imageLabel.Size = UDim2.fromScale(1,1)
 
 local video = Flightpath.new(imageLabel)
 video.Video = myVideo
-video.Looping = true
+video.Looped = true
 
 print("My video started playing")
 video:Play()
